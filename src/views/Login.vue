@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     login() {
-        this.$store.dispatch('login', this.authData);
-        this.$router.push('/');
+        this.$store.dispatch('login', this.authData);                      
+        this.$router.push('boats');
     },
     // login() {
     //   axios

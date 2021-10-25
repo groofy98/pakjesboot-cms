@@ -16,8 +16,10 @@ export default new Vuex.Store({
   },
   mutations: {
     authUser(state, userData) {
-      state.token = userData.bearerToken
-      //state.username = userData.userDetails.userName
+      state.token = userData.bearerToken      
+    },
+    setToken(state){
+      state.token = localStorage.token;
     }
   },
   actions: {
@@ -31,10 +33,9 @@ export default new Vuex.Store({
           console.log(res.data);
           commit('authUser', res.data);
           axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.bearerToken;
-          localStorage.token = res.data.bearerToken;
-          //localStorage.userName = authData.userName;
+          localStorage.token = res.data.bearerToken;              
         })
         .catch((error) => (this.error = error));
-    }
+    },    
   }
 })

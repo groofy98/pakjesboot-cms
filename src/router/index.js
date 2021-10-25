@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Boats from '../views/Boats.vue'
+import store from '../store/index.js'
+import Users from '../views/Users.vue'
+import Shipments from '../views/Shipments.vue'
+
 
 Vue.use(VueRouter)
 
@@ -10,12 +14,34 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/boats',
     name: 'Boats',
-    component: Boats
+    component: Boats,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/shipments',
+    name: 'Shipments',
+    component: Shipments,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/login',
@@ -42,7 +68,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!this.$store.getters.isLoggedIn) {
+    if (!store.getters.isAuthenticated) {
       next({ name: 'Login' })
     } else {
       next() // go to wherever I'm going

@@ -1,19 +1,19 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="boats"
+    :items="users"
     sort-by="name"
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>Boats CRUD</v-toolbar-title>
+        <v-toolbar-title>Users CRUD</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              New Boat
+              New User
             </v-btn>
           </template>
           <v-card>
@@ -21,20 +21,68 @@
               <span class="text-h5">{{ formTitle }}</span>
             </v-card-title>
 
-            <v-card-text>
+             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
                     <v-text-field
-                      v-model="editedItem.name"
-                      label="Boat name"
+                      v-model="editedItem.firstName"
+                      label="First name"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
                     <v-text-field
-                      v-model="editedItem.depot"
-                      label="Home Depot"
-                    ></v-text-field>                                   
+                      v-model="editedItem.lastName"
+                      label="Last name"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.email"
+                      label="email"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.username"
+                      label="Username"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.phoneNumber"
+                      label="Phone number"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.password"
+                      label="Password"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -84,20 +132,16 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Name",
+        text: "Username",
         align: "start",        
-        value: "name",
-      },
-      { text: "Longitude", value: "realTimeData.currentLocation.longitude" },
-      { text: "Latitude", value: "realTimeData.currentLocation.latitude" },
-      { text: "Id", value: "id" },      
+        value: "username",
+      },      
+      { text: "User Type", value: "userType"      },      
       { text: "Actions", value: "actions", sortable: false },
     ],
-    boats: [],
+    users: [],
     editedIndex: -1,
-    editedItem: {
-      name: "",
-      depot: ""
+    editedItem: {      
     },    
   }),
   computed: {
@@ -118,24 +162,24 @@ export default {
   },
   methods: {
     initialize() {        
-      axios.get("boats").then((response) => {
+      axios.get("users").then((response) => {
           // console.log(response);
-          this.boats = response.data;
+          this.users = response.data;
         })
     },
     editItem(item) {
-      this.editedIndex = this.boats.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.editedIndex = this.users.indexOf(item);            
+      axios.get("/users/" + item.id ).then((res) => {this.editedItem = res.data;})
       this.dialog = true;
     },
     deleteItem(item) {
-      this.editedIndex = this.boats.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.editedIndex = this.users.indexOf(item);
+      this.editedItem = Object.assign({}, item);      
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      this.boats.splice(this.editedIndex, 1);
-      axios.delete("/boats/" + this.editedItem.id);
+      this.users.splice(this.editedIndex, 1);
+      axios.delete("/users/" + this.editedItem.id);
       this.closeDelete();
     },
     close() {
@@ -153,8 +197,8 @@ export default {
       });
     },
     save() {      
-      axios.post("/boats", this.editedItem).then((res) => {
-        this.boats.push(res.data);
+      axios.post("/users", this.editedItem).then((res) => {
+        this.users.push(res.data);
         });
       
       this.close();

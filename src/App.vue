@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer app>
+    <v-navigation-drawer app fixed>
       <nav-bar></nav-bar>
     </v-navigation-drawer>
 
@@ -39,5 +39,9 @@ export default {
       return this.$store.state.token;
     },
   },
+  created: {
+    
+  }
+  
 };
 </script>
