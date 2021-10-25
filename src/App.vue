@@ -25,6 +25,9 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import axios from './axios-auth.js'
+import process from 'dotenv'
+
 export default {
   name: "App",
   components: {
@@ -39,8 +42,13 @@ export default {
       return this.$store.state.token;
     },
   },
-  created: {
-    
+  mounted: {
+    setAppURL(){
+      if(typeof process.env.APP_URL !== undefined){
+        axios.baseURL = process.env.APP_URL;
+      }
+
+    }
   }
   
 };
