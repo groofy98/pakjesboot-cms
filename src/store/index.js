@@ -16,15 +16,15 @@ export default new Vuex.Store({
   },
   mutations: {
     authUser(state, userData) {
-      state.token = userData.bearerToken      
+      state.token = userData.bearerToken
     },
-    setToken(state){
+    setToken(state) {
       state.token = localStorage.token;
     }
   },
   actions: {
-    login({ commit }, authData) {
-      axios
+    async login({ commit }, authData) {
+      await axios
         .post("/login", {
           username: authData.username,
           password: authData.password,
@@ -33,9 +33,9 @@ export default new Vuex.Store({
           console.log(res.data);
           commit('authUser', res.data);
           axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.bearerToken;
-          localStorage.token = res.data.bearerToken;              
+          localStorage.token = res.data.bearerToken;
         })
         .catch((error) => (this.error = error));
-    },    
+    },
   }
 })

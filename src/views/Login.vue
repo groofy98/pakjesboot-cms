@@ -33,19 +33,10 @@ export default {
     };
   },
   methods: {
-    login() {
-        this.$store.dispatch('login', this.authData);                      
+    async login() {
+        await this.$store.dispatch('login', this.authData);                      
         this.$router.push('boats');
-    },
-    // login() {
-    //   axios
-    //     .post("https://localhost:44365/Login", {
-    //       username: this.username,
-    //       password: this.password,
-    //     })
-    //     .then((res) => console.log(res))
-    //     .catch((error) => (this.error = error));
-    // },
+    },    
   },
 };
 </script>
