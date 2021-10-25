@@ -6,7 +6,7 @@ import Boats from '../views/Boats.vue'
 import store from '../store/index.js'
 import Users from '../views/Users.vue'
 import Shipments from '../views/Shipments.vue'
-
+import Depots from '../views/Depots.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +31,14 @@ const routes = [
     path: '/shipments',
     name: 'Shipments',
     component: Shipments,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/depots',
+    name: 'Depots',
+    component: Depots,
     meta: {
       requiresAuth: true,
     },

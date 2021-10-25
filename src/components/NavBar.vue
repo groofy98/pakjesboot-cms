@@ -62,7 +62,7 @@
         { text: 'Boats', icon: 'mdi-sail-boat', url: 'boats' },
         { text: 'Users', icon: 'mdi-account-multiple', url: 'users' },
         { text: 'Shipments', icon: 'mdi-truck-cargo-container', url: 'shipments' },
-        { text: 'Routes', icon: 'mdi-map-marker-path', url: 'routes' },
+        { text: 'Depots', icon: 'mdi-map-marker-path', url: 'depots' },
         { text: 'Errors', icon: 'mdi-alert-circle', url: 'errors' },        
       ],
     }),
