@@ -25,8 +25,8 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import axios from './axios-auth.js'
-import process from 'dotenv'
+import axios from './axios-auth.js';
+import process from 'dotenv';
 
 export default {
   name: "App",
@@ -44,8 +44,8 @@ export default {
   },
   mounted: {
     setAppURL(){
-      if(typeof process.env.APP_URL !== undefined){
-        axios.baseURL = process.env.APP_URL;
+      if(process.env.NODE_ENV !== 'development'){
+        axios.baseURL = 'https://pakjesboot.azurewebsites.net/api';
       }
 
     }
