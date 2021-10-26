@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -33,7 +34,9 @@ export default {
     };
   },
   methods: {
-    async login() {      
+    async login() {
+        console.log(axios.baseURL);
+        console.log(process.env.VUE_APP_API_URL);
         await this.$store.dispatch('login', this.authData);        
         this.$router.push('boats');
     },    

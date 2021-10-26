@@ -2,7 +2,7 @@
 
 set -e
 
-npm run build
+vue-cli-service build --mode deploy
 
 cd dist
 
