@@ -33,7 +33,7 @@ export default {
     };
   },
   methods: {
-    async login() {
+    async login() {      
         await this.$store.dispatch('login', this.authData);        
         this.$router.push('boats');
     },    

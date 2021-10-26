@@ -41,9 +41,10 @@ export default {
       return this.$store.state.token;
     },
   },
-  mounted: {
+  created: {
     setAppURL(){
-      if(process.env.NODE_ENV === 'production'){
+      console.log(process.env.NODE_ENV);
+      if(process.env.NODE_ENV === 'development'){
         axios.baseURL = 'https://pakjesboot.azurewebsites.net/api';
       }
 
